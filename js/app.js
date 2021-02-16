@@ -16,6 +16,7 @@
  * Define Global Variables
  * 
 */
+const sections = document.querySelectorAll("section");
 
 
 /**
@@ -23,7 +24,16 @@
  * Start Helper Functions
  * 
 */
-
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    const headerHeight = document.querySelector("header").offsetHeight;
+    return (
+        rect.top + headerHeight >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
 
 /**
@@ -34,7 +44,6 @@
 
 // build the nav
 const docFragment = document.createDocumentFragment();
-const sections = document.querySelectorAll("section");
 sections.forEach(section => {
     const li = document.createElement("li");
     const a = document.createElement("a");
@@ -47,7 +56,12 @@ const navBarList = document.querySelector("#navbar__list")
 navBarList.appendChild(docFragment);
 
 // Add class 'active' to section when near top of viewport
-
+sections.forEach(section => {
+    section.classList.remove("your-active-class");
+    if(isInViewport(section)) {
+        section.classList.add("your-active-class")
+    }
+});
 
 // Scroll to anchor ID using scrollTO event
 
