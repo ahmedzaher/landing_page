@@ -49,6 +49,7 @@ sections.forEach(section => {
     const a = document.createElement("a");
     a.textContent = section.getAttribute("data-nav");
     a.classList.add("menu__link");
+    a.setAttribute("nav-to", section.getAttribute("id"));
     li.appendChild(a);
     docFragment.appendChild(li);
 });
@@ -63,7 +64,25 @@ sections.forEach(section => {
     }
 });
 
-// Scroll to anchor ID using scrollTO event
+// Scroll to anchor ID using scrollTO event and set active class for section and link
+document.addEventListener("scroll", ()=> {
+    sections.forEach(section => {
+        if(isInViewport(section)) {
+            //clear active class from all links and sections
+            document.querySelectorAll(`a.menu__link`)
+                .forEach(link => link.classList.remove("active-link"));
+
+            sections.forEach(section => section.classList.remove("your-active-class"));
+
+            // add active class to section & link
+            document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
+                .classList.add("active-link");
+
+            section.classList.add("your-active-class");
+
+        }
+    })
+});
 
 
 /**
@@ -89,8 +108,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 })
-
-
-// Set sections as active
 
 
