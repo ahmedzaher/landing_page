@@ -75,6 +75,21 @@ sections.forEach(section => {
 // Build menu 
 
 // Scroll to section on link click
+navToSectionByLink = (link) => {
+    const dataNav = link.textContent;
+    const section = document.querySelector(`section[data-nav="${dataNav}"]`);
+    section.scrollIntoView({behavior: 'smooth'});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const menuLinks = document.querySelectorAll("a.menu__link");
+    menuLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            navToSectionByLink(link);
+        });
+    });
+})
+
 
 // Set sections as active
 
