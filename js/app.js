@@ -69,10 +69,11 @@ document.addEventListener("scroll", ()=> {
     sections.forEach(section => {
         if(isInViewport(section)) {
             //clear active class from all links and sections
-            document.querySelectorAll(`a.menu__link`)
+            document.querySelectorAll(`a.menu__link.active-link`)
                 .forEach(link => link.classList.remove("active-link"));
 
-            sections.forEach(section => section.classList.remove("your-active-class"));
+            document.querySelectorAll(`a.menu__link.your-active-class`)
+                .forEach(section => section.classList.remove("your-active-class"));
 
             // add active class to section & link
             document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
