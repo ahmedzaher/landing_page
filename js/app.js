@@ -108,6 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
             navToSectionByLink(link);
         });
     });
+
+    const toTopLink = document.querySelector("#to-top-link");
+    toTopLink.addEventListener("click", ()=> {
+        document.querySelector("body main header h1").scrollIntoView({behavior: 'smooth'});
+    })
 })
 
 
