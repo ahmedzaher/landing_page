@@ -72,15 +72,15 @@ document.addEventListener("scroll", ()=> {
             document.querySelectorAll(`a.menu__link.active-link`)
                 .forEach(link => link.classList.remove("active-link"));
 
-            document.querySelectorAll(`a.menu__link.your-active-class`)
+            document.querySelectorAll(`section.your-active-class`)
                 .forEach(section => section.classList.remove("your-active-class"));
 
             // add active class to section & link
             document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
                 .classList.add("active-link");
-
+            console.log("the link  class was added!!")
             section.classList.add("your-active-class");
-
+            console.log("the section class was added!!")
         }
     })
 });
