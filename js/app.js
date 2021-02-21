@@ -58,31 +58,10 @@ navBarList.appendChild(docFragment);
 
 // Add class 'active' to section when near top of viewport
 sections.forEach(section => {
-    section.classList.remove("your-active-class");
+    section.classList.remove("active-section");
     if(isInViewport(section)) {
-        section.classList.add("your-active-class")
+        section.classList.add("active-section")
     }
-});
-
-// Scroll to anchor ID using scrollTO event and set active class for section and link
-document.addEventListener("scroll", ()=> {
-    sections.forEach(section => {
-        if(isInViewport(section)) {
-            //clear active class from all links and sections
-            document.querySelectorAll(`a.menu__link.active-link`)
-                .forEach(link => link.classList.remove("active-link"));
-
-            document.querySelectorAll(`section.your-active-class`)
-                .forEach(section => section.classList.remove("your-active-class"));
-
-            // add active class to section & link
-            document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
-                .classList.add("active-link");
-            console.log("the link  class was added!!")
-            section.classList.add("your-active-class");
-            console.log("the section class was added!!")
-        }
-    })
 });
 
 
@@ -91,8 +70,25 @@ document.addEventListener("scroll", ()=> {
  * Begin Events
  * 
 */
+// Add active class to current section and it's link and clear the others
+document.addEventListener("scroll", ()=> {
+    sections.forEach(section => {
+        if(isInViewport(section)) {
+            //clear active class from all links and sections
+            document.querySelectorAll(`a.menu__link.active-link`)
+                .forEach(link => link.classList.remove("active-link"));
 
-// Build menu 
+            document.querySelectorAll(`section.active-section`)
+                .forEach(section => section.classList.remove("active-section"));
+
+            // add active class to section & link
+            document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
+                .classList.add("active-link");
+            section.classList.add("active-section");
+        }
+    })
+});
+
 
 // Scroll to section on link click
 navToSectionByLink = (link) => {
