@@ -14,4 +14,4 @@ Just navigate to **index.html** using any browser
 You can contact me directly on _ahmedzaher54@gmail.com_
 
 ## License
-    No copyrights for this project, it's free to use and contribute
+No copyrights for this project, it's free to use and contribute
