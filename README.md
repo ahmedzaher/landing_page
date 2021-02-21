@@ -1,5 +1,17 @@
 # Landing Page Project
 
-A Landing page with dynamic navigation bar built based on main sections in the section.
+A Landing page with dynamic navigation bar built based on main sections in the web site.
 
-The project developed using pure Javascript, css & HTML
+## Technologies used
+* Javascript
+* CSS
+* HTML
+
+## Installation
+Just navigate to **index.html** using any browser
+
+## Need help
+You can contact me directly on _ahmedzaher54@gmail.com_
+
+## License
+    No copyrights for this project, it's free to use and contribute
