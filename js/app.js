@@ -27,12 +27,13 @@ const sections = document.querySelectorAll("section");
 function isInViewport(element) {
     const rect = element.getBoundingClientRect();
     const headerHeight = document.querySelector("header").offsetHeight;
-    return (
-        rect.top + headerHeight >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+    const screenHeight = (window.innerHeight || document.documentElement.clientHeight);
+
+    const fullyViewed = rect.top + headerHeight >= 0 && rect.bottom + headerHeight <= screenHeight;
+
+    const partuallyViewed = rect.top <= screenHeight && rect.bottom  >= headerHeight;
+
+    return fullyViewed || partuallyViewed;
 }
 
 
