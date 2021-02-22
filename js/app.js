@@ -17,7 +17,8 @@
  * 
 */
 const sections = document.querySelectorAll("section");
-
+const headerHeight = document.querySelector("header").offsetHeight;
+const screenHeight = (window.innerHeight || document.documentElement.clientHeight);
 
 /**
  * End Global Variables
@@ -26,14 +27,11 @@ const sections = document.querySelectorAll("section");
 */
 function isInViewport(element) {
     const rect = element.getBoundingClientRect();
-    const headerHeight = document.querySelector("header").offsetHeight;
-    const screenHeight = (window.innerHeight || document.documentElement.clientHeight);
-
     const fullyViewed = rect.top + headerHeight >= 0 && rect.bottom + headerHeight <= screenHeight;
 
     const partuallyViewed = rect.top <= screenHeight && rect.bottom  >= headerHeight;
 
-    return fullyViewed || partuallyViewed;
+    return  fullyViewed || partuallyViewed;
 }
 
 
@@ -73,8 +71,8 @@ sections.forEach(section => {
 */
 // Add active class to current section and it's link and clear the others
 document.addEventListener("scroll", ()=> {
-    sections.forEach(section => {
-        if(isInViewport(section)) {
+    for(let i = 0; i < sections.length; i++ ) {
+        if(isInViewport(sections[i])) {
             //clear active class from all links and sections
             document.querySelectorAll(`a.menu__link.active-link`)
                 .forEach(link => link.classList.remove("active-link"));
@@ -83,11 +81,28 @@ document.addEventListener("scroll", ()=> {
                 .forEach(section => section.classList.remove("active-section"));
 
             // add active class to section & link
-            document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
+            document.querySelector(`a.menu__link[nav-to=${sections[i].getAttribute("id")}]`)
                 .classList.add("active-link");
-            section.classList.add("active-section");
+            sections[i].classList.add("active-section");
+            break;
         }
-    })
+        
+    }
+    // sections.forEach(section => {
+    //     if(isInViewport(section)) {
+    //         //clear active class from all links and sections
+    //         document.querySelectorAll(`a.menu__link.active-link`)
+    //             .forEach(link => link.classList.remove("active-link"));
+
+    //         document.querySelectorAll(`section.active-section`)
+    //             .forEach(section => section.classList.remove("active-section"));
+
+    //         // add active class to section & link
+    //         document.querySelector(`a.menu__link[nav-to=${section.getAttribute("id")}]`)
+    //             .classList.add("active-link");
+    //         section.classList.add("active-section");
+    //     }
+    // })
 });
 
 
@@ -95,7 +110,11 @@ document.addEventListener("scroll", ()=> {
 navToSectionByLink = (link) => {
     const dataNav = link.textContent;
     const section = document.querySelector(`section[data-nav="${dataNav}"]`);
-    section.scrollIntoView({behavior: 'smooth'});
+    // window.scrollTo({
+    //     top: section.getBoundingClientRect().top + headerHeight,
+    //     behavior: "smooth"
+    // });   
+    section.scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 
 document.addEventListener('DOMContentLoaded', () => {
